@@ -9,7 +9,7 @@ public interface GuestbookService {
 
 	//글목록을 리턴하는 메서든 선언합니다
 	//글목록을 담는 DTO는 PageResult이기 떄문에 PageResultDTO를 리턴하도록합니다
-	PageResultDTO<PageRequestDTO, Guestbook> getList(PageRequestDTO requestDTO);
+	PageResultDTO<GuestbookDTO, Guestbook> getList(PageRequestDTO requestDTO);
 	
 	default GuestbookDTO entityToDto(Guestbook entity) {
 		
@@ -17,21 +17,6 @@ public interface GuestbookService {
 							.writer(entity.getWriter()).regDate(entity.getRegDate()).modDate(entity.getModDate()).build();
 		return dto;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	//이 서비스 층에서 게시판의 사용자가 요청하는 로직을 모두 처리한다고 보면 됩니다
@@ -58,5 +43,7 @@ public interface GuestbookService {
 		
 	}
 	
+	//글상세 메서드 선언
+	GuestbookDTO read(Long gno);
 	
 }

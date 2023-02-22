@@ -118,36 +118,35 @@ public class GuestBookRepositoryTests {
 //			guestbookRepository.save(guestbook);
 //		
 //	}
-	@Test
-	public void testConditionQuery() {
-		Pageable pageable = PageRequest.of(0, 10, Sort.by("gno").descending());
-		String keyword = "1";
-		QGuestbook qGuestbook = QGuestbook.guestbook;
-		BooleanBuilder builder = new BooleanBuilder();
-		BooleanExpression exContent = qGuestbook.content.contains(keyword);
-		BooleanExpression exTitle = qGuestbook.content.contains(keyword);
-		
-		BooleanExpression exAll = exTitle.or(exContent);
-		
-		builder.and(exAll);
-		
-		//여기에 특정 조건을 더 추가 해볼게요 뭐뭐보다 크냐 작냐 등의 
-		//논리연산식을 적용할 수 있는데 문제는 gt lt등으로 되어있습니다
-		builder.and(qGuestbook.gno.lt(100L));
-		
-		Page<Guestbook> result = guestbookRepository.findAll(builder, pageable);
-		
-		result.stream().forEach(guestbook->{
-			System.out.println(guestbook);
-		});
-		
-		
-		
-		
+//	@Test
+//	public void testConditionQuery() {
+//		Pageable pageable = PageRequest.of(0, 10, Sort.by("gno").descending());
+//		String keyword = "1";
+//		QGuestbook qGuestbook = QGuestbook.guestbook;
+//		BooleanBuilder builder = new BooleanBuilder();
+//		BooleanExpression exContent = qGuestbook.content.contains(keyword);
+//		BooleanExpression exTitle = qGuestbook.content.contains(keyword);
+//		
+//		BooleanExpression exAll = exTitle.or(exContent);
+//		
+//		builder.and(exAll);
+//		
+//		//여기에 특정 조건을 더 추가 해볼게요 뭐뭐보다 크냐 작냐 등의 
+//		//논리연산식을 적용할 수 있는데 문제는 gt lt등으로 되어있습니다
+//		builder.and(qGuestbook.gno.lt(100L));
+//		
+//		Page<Guestbook> result = guestbookRepository.findAll(builder, pageable);
+//		
+//		result.stream().forEach(guestbook->{
+//			System.out.println(guestbook);
+//		});
+//		
+//		
 		
 		
 		
-	}
+		
+
 	
 	
 	
@@ -155,6 +154,6 @@ public class GuestBookRepositoryTests {
 	
 	
 	
-	
+
 	
 }

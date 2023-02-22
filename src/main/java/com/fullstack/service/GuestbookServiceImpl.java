@@ -1,5 +1,11 @@
 package com.fullstack.service;
 
+import java.util.Optional;
+import java.util.function.Function;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.fullstack.dto.GuestbookDTO;
@@ -37,10 +43,29 @@ public class GuestbookServiceImpl implements GuestbookService {
 		return entity.getGno();
 	}
 	@Override
-	public PageResultDTO<PageRequestDTO, Guestbook> getList(PageRequestDTO requestDTO) {
-		// TODO Auto-generated method stub
-		return null;
+	public PageResultDTO<GuestbookDTO, Guestbook> getList(PageRequestDTO requestDTO) {
+		
+		//PageRequestDTO가 하는일
+		//Pageable 객체를 통해서 페이지와 소트, 목록등을 얻어냈습니다
+		//그래서 Pageable 객체를 얻어내고 기본 sort를 적용합니다
+		
+		Pageable pageable = requestDTO.getPageable(Sort.by("gno").descending());
+		//repository를 통해 pageable 파라미터로 Page Entity 리스트를 얻어냅니다
+		Page<Guestbook> result = guestbookRepository.findAll(pageable);
+		
+		//entity를 dto로 변환 하도록 Function 객체 생성
+		Function<Guestbook, GuestbookDTO> fn = (entity->entityToDto(entity));
+		
+		//PageResultDTO 객체생성
+		return new PageResultDTO<>(result, fn);
+		
 	}
 	
+	@Override
+	public GuestbookDTO read(Long gno) {
+		Optional<Guestbook> result = guestbookRepository.findById(gno);
+		
+		return result.isPresent()?entityToDto(result.get()):null;
+	}
 		
 }
