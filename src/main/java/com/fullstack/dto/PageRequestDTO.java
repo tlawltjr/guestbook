@@ -20,6 +20,10 @@ public class PageRequestDTO {
 	private int page;
 	private int size;
 	
+	//검색시 맵핑되는 키워드 필드 추가
+	private String type;//조건 검색 키워드
+	private String keyword;//검색 키워드 필드
+	
 	public PageRequestDTO() {
 		this.page = 1;
 		this.size = 10;

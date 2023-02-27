@@ -71,9 +71,30 @@ public class GuestbookController {
 		model.addAttribute("dto", dto);
 	}
 	
+	@PostMapping("/modify")
+	public String pModify(GuestbookDTO dto, RedirectAttributes redirectAttributes) {
+		log.info("수정 요청");
+		Long number = service.modify(dto);
+		
+		redirectAttributes.addFlashAttribute("msg", number);
+		return "redirect:/guestbook/list";
+	}
+
 	@GetMapping("/modify")
-	public void modify() {
-		log.info("Modify 처리");
+	public void modify(long gno, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO, Model model) {
+		log.info("수정 요청");
+		GuestbookDTO dto = service.read(gno);
+		
+		model.addAttribute("dto", dto);
+	}
+	
+	@PostMapping("/remove")
+	public String remove(GuestbookDTO dto, RedirectAttributes redirectAttributes) {
+		log.info("삭제 요청");
+		Long number = service.remove(dto);
+		
+		redirectAttributes.addFlashAttribute("msg", number);
+		return "redirect:/guestbook/list";
 	}
 	
 	

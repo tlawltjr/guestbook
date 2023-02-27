@@ -9,11 +9,10 @@
 
         <form action="/guestbook/modify" method="post">
 
-            <!--페이지 번호  ,하위에 페지이 번호를 담는 Tag 작성해보세요.-->
-           
-            
-            <!-- 하위는 추후 검색시에 적용? -->
-            
+            <!--페이지 번호  -->
+            <input type="hidden" name="page" th:value="${requestDTO.page}">
+            <input type="hidden" name="type" th:value="${requestDTO.type}" >
+            <input type="hidden" name="keyword" th:value="${requestDTO.keyword}" >
 
 
             <div class="form-group">

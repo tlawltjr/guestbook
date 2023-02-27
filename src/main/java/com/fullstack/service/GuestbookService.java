@@ -12,9 +12,16 @@ public interface GuestbookService {
 	PageResultDTO<GuestbookDTO, Guestbook> getList(PageRequestDTO requestDTO);
 	
 	default GuestbookDTO entityToDto(Guestbook entity) {
+		//PageRequest객체 생성
+				
 		
-		GuestbookDTO dto = GuestbookDTO.builder().gno(entity.getGno()).title(entity.getTitle()).content(entity.getContent())
-							.writer(entity.getWriter()).regDate(entity.getRegDate()).modDate(entity.getModDate()).build();
+		GuestbookDTO dto = GuestbookDTO.builder()
+							.gno(entity.getGno())
+							.title(entity.getTitle())
+							.content(entity.getContent())
+							.writer(entity.getWriter())
+							.regDate(entity.getRegDate())
+							.modDate(entity.getModDate()).build();
 		return dto;
 	}
 	
@@ -46,4 +53,9 @@ public interface GuestbookService {
 	//글상세 메서드 선언
 	GuestbookDTO read(Long gno);
 	
+	//수정메서드 선언
+	Long modify(GuestbookDTO dto);
+	
+	//삭제 메서드 선언
+	Long remove(GuestbookDTO dto);
 }
