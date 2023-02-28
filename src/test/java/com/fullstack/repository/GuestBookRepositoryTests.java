@@ -29,7 +29,7 @@ public class GuestBookRepositoryTests {
 	
 	//하위 메서드에서는 Guestbook 테이블에 데이터를 약 300 개 정도 Insert 시킵니다.
 //	@Test
-//	public void insertDummies() {
+//	public void insertDummies()
 //		
 //		//스트림이용해서 한번에 적용함.
 //		IntStream.rangeClosed(1, 300).forEach(i->{
